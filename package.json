@@ -5,8 +5,11 @@
   "license": "ISC",
   "author": "Povaliaeva Evg.",
   "type": "module",
-  "main": "index.js",
+  "main": "./frontend/src/main.js",
   "scripts": {
     "start": "node backend/server/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5"
   }
 }

@@ -52,15 +52,33 @@
 //   }
 // }
 
-fetchDataFromAPI(URL_ApiData)
-  .then(data => {
-    const mapedData = mapToServerFormat(data);
-    mapedData.forEach(externalStudent => {
-      importExternalData(externalStudent)
-      .then(data => {
-        console.log('data import', data)
-      })
-    })  
-      .catch (error => console.log('error import ', error))
-  })
-  .catch(error => console.log('error fetchDataFromAPI', error))
+// fetchDataFromAPI(URL_ApiData)
+//   .then(data => {
+//     const mapedData = mapToServerFormat(data);
+//     mapedData.forEach(externalStudent => {
+//       importExternalData(externalStudent)
+//       .then(data => {
+//         console.log('data import', data)
+//       })
+//     })  
+//       .catch (error => console.log('error import ', error))
+//   })
+//   .catch(error => console.log('error fetchDataFromAPI', error))
+
+import { apiClient } from './apiClient.js';
+
+export async function get(url, options) {
+  return await apiClient(url, { method: 'GET', ...options });
+}
+export async function post(url, body, options) {
+  return await apiClient(url, { method: 'POST', body, ...options });
+}
+export async function put(url, body, options) {
+  return await apiClient(url, { method: 'PUT', body, ...options });
+}
+export async function patch(url, body, options) {
+  return await apiClient(url, { method: 'PATCH', body, ...options });
+}
+export async function del(url, options) {
+  return await apiClient(url, { method: 'DELETE', ...options });
+}
