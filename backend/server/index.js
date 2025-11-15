@@ -1,7 +1,10 @@
 /* eslint-disable no-console */
 // импорт стандартных библиотек Node.js
-const { existsSync, readFileSync, writeFileSync } = require('fs');
-const { createServer } = require('http');
+// const { existsSync, readFileSync, writeFileSync } = require('fs');
+// const { createServer } = require('http');
+
+import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { createServer } from 'http';
 
 // файл для базы данных
 const DB_FILE = process.env.DB_FILE || './db.json';
@@ -162,7 +165,8 @@ function deleteStudent(itemId) {
 if (!existsSync(DB_FILE)) writeFileSync(DB_FILE, '[]', { encoding: 'utf8' });
 
 // создаём HTTP сервер, переданная функция будет реагировать на все запросы к нему
-module.exports = createServer(async(req, res) => {
+const server = createServer(async(req, res) => {
+// module.exports = createServer(async(req, res) => {
         // req - объект с информацией о запросе, res - объект для управления отправляемым ответом
 
         // этот заголовок ответа указывает, что тело ответа будет в JSON формате

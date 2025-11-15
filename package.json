@@ -1,12 +1,12 @@
 {
-  "name": "courseproject",
+  "name": "student_contro_lpanel",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
-  "author": "",
-  "type": "commonjs",
+  "author": "Povaliaeva Evg.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node backend/server/index.js"
   }
 }
