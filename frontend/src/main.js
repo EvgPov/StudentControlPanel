@@ -3,8 +3,8 @@ import { URL_SERVER } from '../../backend/config/apiConfig.js';
 import { fetchDataFromAPI } from '../../backend/services/dataSeeder.js';
 import { post, get } from '../src/api/script.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
+async function initDB() {
+   try {
     // Проверяем, есть ли данные на сервере
     const existing = await get(URL_SERVER);
     // если база пуста — импортируем
@@ -19,4 +19,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (error) {
     console.error('Error:', error);
   }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+ 
 })
