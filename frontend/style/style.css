@@ -1,0 +1,75 @@
+@font-face {
+  font-family: SourceCodePro-Regular;
+  src: url('./fonts/SourceCodePro-Regular.ttf');
+}
+@font-face {
+  font-family: SourceCodePro-Bold;
+  src: url('./fonts/SourceCodePro-Bold.ttf');
+}
+* {
+  box-sizing: border-box;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family:  SourceCodePro-Regular;
+  color: #333;
+  background-color: #f4f6f9;
+}
+.main {
+  max-width: 1200px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: white;
+
+  padding: 2rem;
+
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-family:  SourceCodePro-Bold;
+  text-align: center;
+
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+.main__table {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+}
+.main__table-table {
+  width: 100%;
+  /* color: white; */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600px;
+}
+.main__table-table th,
+.main__table-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+.main__table-table th {
+  font-family: SourceCodePro-Bold;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+}
+.main__table-table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+.main__table-table tbody tr:hover {
+  background-color: #e3f2fd;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
