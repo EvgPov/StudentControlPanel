@@ -30,17 +30,36 @@ class ApiError extends Error {
  * @throws {ApiError} Некорректные данные в аргументе
  * @returns {Object} Объект, созданный из тела запроса
  */
+// function drainJson(req) {
+//     return new Promise((resolve) => {
+//         let data = '';
+//         req.on('data', (chunk) => {
+//             data += chunk;
+//         });
+//         req.on('end', () => {
+//             resolve(JSON.parse(data));
+//         });
+//     });
+// }
+
+
 function drainJson(req) {
-    return new Promise((resolve) => {
-        let data = '';
-        req.on('data', (chunk) => {
-            data += chunk;
-        });
-        req.on('end', () => {
-            resolve(JSON.parse(data));
-        });
+  return new Promise((resolve, reject) => {
+    let data = '';
+    req.on('data', chunk => data += chunk);
+    req.on('end', () => {
+      if (!data) return resolve({});
+      try {
+        resolve(JSON.parse(data));
+      } catch {
+        reject(new ApiError(400, { message: 'Invalid JSON' }));
+      }
     });
+    req.on('error', () => reject(new ApiError(400, { message: 'Request error' })));
+  });
 }
+
+
 
 /**
  * Проверяет входные данные и создаёт из них корректный объект студента
@@ -85,23 +104,48 @@ function makeStudentFromData(data) {
  * @param {{ search: string }} [params] - Поисковая строка
  * @returns {{ id: string, name: string, surname: string, lastname: string, birthday: string, studyStart: string, faculty: string }[]} Массив студентов
  */
+// function getStudentList(params = {}) {
+//     const students = JSON.parse(readFileSync(DB_FILE) || '[]');
+//     if (params.search) {
+//         const search = params.search.trim().toLowerCase();
+//         return students.filter(student => [
+//                 student.name,
+//                 student.surname,
+//                 student.lastname,
+//                 student.birthday,
+//                 student.studyStart,
+//                 student.faculty,
+//             ]
+//             .some(str => str.toLowerCase().includes(search))
+//         );
+//     }
+//     return students;
+// }
+
+
+
 function getStudentList(params = {}) {
-    const students = JSON.parse(readFileSync(DB_FILE) || '[]');
-    if (params.search) {
-        const search = params.search.trim().toLowerCase();
-        return students.filter(student => [
-                student.name,
-                student.surname,
-                student.lastname,
-                student.birthday,
-                student.studyStart,
-                student.faculty,
-            ]
-            .some(str => str.toLowerCase().includes(search))
-        );
-    }
-    return students;
+  let students = [];
+  try {
+    const fileContent = readFileSync(DB_FILE, 'utf-8');
+    students = fileContent.trim() ? JSON.parse(fileContent) : [];
+  } catch (err) {
+    console.error('Ошибка чтения db.json:', err);
+    students = [];
+  }
+
+  if (params.search) {
+    const search = params.search.trim().toLowerCase();
+    return students.filter(student =>
+      [student.name, student.surname, student.lastname, student.birthday, student.studyStart, student.faculty]
+        .some(str => str && str.toLowerCase().includes(search))
+    );
+  }
+  return students;
 }
+
+
+
 
 /**
  * Создаёт и сохраняет студента в базу данных
@@ -165,7 +209,7 @@ function deleteStudent(itemId) {
 if (!existsSync(DB_FILE)) writeFileSync(DB_FILE, '[]', { encoding: 'utf8' });
 
 // создаём HTTP сервер, переданная функция будет реагировать на все запросы к нему
-const server = createServer(async(req, res) => {
+export const server = createServer(async(req, res) => {
 // module.exports = createServer(async(req, res) => {
         // req - объект с информацией о запросе, res - объект для управления отправляемым ответом
 
@@ -211,13 +255,26 @@ const server = createServer(async(req, res) => {
                 if (uri === '' || uri === '/') {
                     // /api/students
                     if (req.method === 'GET') return getStudentList(queryParams);
-                    if (req.method === 'POST') {
-                        const createdItem = createStudent(await drainJson(req));
+
+                    // if (req.method === 'POST') {
+                    //     const createdItem = createStudent(await drainJson(req));
+                    //     res.statusCode = 201;
+                    //     res.setHeader('Access-Control-Expose-Headers', 'Location');
+                    //     res.setHeader('Location', `${URI_PREFIX}/${createdItem.id}`);
+                    //     return createdItem;
+                    // }
+
+
+                        if (req.method === 'POST') {
+                        const body = await drainJson(req);
+                        const createdItem = createStudent(body);
                         res.statusCode = 201;
                         res.setHeader('Access-Control-Expose-Headers', 'Location');
                         res.setHeader('Location', `${URI_PREFIX}/${createdItem.id}`);
                         return createdItem;
-                    }
+                        }
+
+                        
                 } else {
                     // /api/students/{id}
                     // параметр {id} из URI запроса

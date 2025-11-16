@@ -65,7 +65,7 @@
 //   })
 //   .catch(error => console.log('error fetchDataFromAPI', error))
 
-import { apiClient } from './apiClient.js';
+import apiClient  from './apiClient.js';
 
 export async function get(url, options) {
   return await apiClient(url, { method: 'GET', ...options });
