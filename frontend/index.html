@@ -16,7 +16,21 @@
     </section>
     <section class="main__table">
       <h2 class="main__table-title">Table</h2>
-      <table class="main__table-table"></table>
+      <table data-component="students-table" class="main__table-table">
+        <thead data-role="table-header">
+          <tr>
+            <th data-field="id">№</th>
+            <th data-field="name">ИМЯ</th>
+            <th data-field="surname">ОТЧЕСТВО</th>
+            <th data-field="lastname">ФАМИЛИЯ</th>
+            <th data-field="birthday">ДАТА РОЖДЕНИЯ</th>
+            <th data-field="studyStart">ГОД НАЧАЛА ОБУЧЕНИЯ</th>
+            <th data-field="faculty">ФАКУЛЬТЕТ</th>
+            <th data-field="delete"></th>
+          </tr>
+        </thead>
+        <tbody data-role="table-body"></tbody>
+      </table>
     </section>
     <section class="main__add-form">
       <h2 class="main__add-form-title">Add form</h2>

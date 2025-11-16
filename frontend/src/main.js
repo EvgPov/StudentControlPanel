@@ -1,26 +1,13 @@
-import { PUBLIC_API_URL } from '../../backend/config/apiConfig.js';
-import { URL_SERVER } from '../../backend/config/apiConfig.js';
-import { fetchDataFromAPI } from '../../backend/services/dataSeeder.js';
-import { post, get } from '../src/api/script.js';
+// import { PUBLIC_API_URL } from '../../backend/config/apiConfig.js';
+// import { URL_SERVER } from '../../backend/config/apiConfig.js';
+// import { fetchDataFromAPI } from '../../backend/services/dataSeeder.js';
+// import { post, get } from '../src/api/script.js';
 
-async function initDB() {
-   try {
-    // Проверяем, есть ли данные на сервере
-    const existing = await get(URL_SERVER);
-    // если база пуста — импортируем
-    if (existing.length === 0) {
-      console.log('База пуста. Запускаем импорт...');
-      const data = await fetchDataFromAPI(PUBLIC_API_URL);
-      for (const student of data) {
-        await post(URL_SERVER, student);
-      }
-      console.log('Импорт завершён');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
+import { studentStore } from '../data/store.js';
+import { initDB } from './init/initDatabase.js'
+import { renderTable } from './dom/elements/table.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
- 
+ await initDB(); // инициализируем БД
+ renderTable(studentStore.students); // рисуем таблицу со студентами
 })

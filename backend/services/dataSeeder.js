@@ -16,6 +16,7 @@ export async function fetchDataFromAPI(url) {
             element.FatherName,
             element.LastName,
             element.DateOfBirth,
+            '2025',
             faculties[0]
       );
       return student
