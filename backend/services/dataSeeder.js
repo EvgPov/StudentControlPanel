@@ -1,5 +1,6 @@
 import { Student } from '../models/Student.js'
 import { faculties } from '../models/constants.js';
+import {  studyYears } from '../models/constants.js'
 
 export async function fetchDataFromAPI(url) {
   // получаем данные с API
@@ -16,8 +17,8 @@ export async function fetchDataFromAPI(url) {
             element.FatherName,
             element.LastName,
             element.DateOfBirth,
-            '2025',
-            faculties[0]
+            studyYears[Math.floor(Math.random() * studyYears.length)],
+            faculties[Math.floor(Math.random() * faculties.length)].label
       );
       return student
     })

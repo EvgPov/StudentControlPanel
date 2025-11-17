@@ -4,7 +4,6 @@ export class Student {
     this.surname = fatherName.toString();
     this.lastname = lastName.toString();
     this.birthday = birthday.toString();
-    // this.studyStart = new Date().getFullYear().toString();
     this.studyStart = studyStart.toString();
     this.faculty = faculty.toString();
   }

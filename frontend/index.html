@@ -19,21 +19,83 @@
         <thead data-role="table-header">
           <tr>
             <th data-field="id">№</th>
-            <th data-field="name">ИМЯ</th>
-            <th data-field="surname">ОТЧЕСТВО</th>
-            <th data-field="lastname">ФАМИЛИЯ</th>
-            <th data-field="birthday">ДАТА РОЖДЕНИЯ</th>
-            <th data-field="studyStart">ГОД НАЧАЛА ОБУЧЕНИЯ</th>
+            <th data-field="name">ФИО</th>
             <th data-field="faculty">ФАКУЛЬТЕТ</th>
+            <th data-field="birthday_age">ДАТА РОЖДЕНИЯ (ВОЗРАСТ)</th>
+            <th data-field="studyYears_courseNumber">ГОДЫ ОБУЧЕНИЯ (НОМЕР КУРСА)</th>
             <th data-field="delete"></th>
           </tr>
         </thead>
         <tbody data-role="table-body"></tbody>
       </table>
     </section>
-    <section class="main__add-form">
-      <h2 class="main__add-form-title">Add form</h2>
-      <form class="main__add-form-form">
+    <section class="main__add">
+      <h2 class="main__add-title">Add a student</h2>
+      <form class="main__add-form" id="add-form" name="form">
+            <label for="studentname" class="label">Имя
+              <input
+              type="text"
+              id="studentname"
+              class="main__add-form__name form__item"
+              name="studentname"
+              placeholder="input students`s name ..."
+              minlength="2"
+              maxlength="200"
+              required
+              />
+            </label>  
+           <label for="surename" class="label">Отчество
+              <input
+              type="text"
+              name="surename"
+              class="main__add-form__surename form__item"
+              name="surename"
+              placeholder="input students`s surename ..."
+              minlength="2"
+              maxlength="200"
+              required
+              />
+            </label>
+          <label for="lastname" class="label">Фамилия
+            <input
+              type="text"
+              id="lastname"
+              class="main__add-form__lastname form__item"
+              name="lastname"
+              placeholder="input students`s lastname ..."
+              minlength="2"
+              maxlength="200"
+              required
+            />
+          </label>  
+          <label for="birthday" class="">День рождения
+            <input
+              type="date"
+              id="birthday"
+              class="main__add-form__birthday form__item"
+              name="birthday"
+              placeholder="input students`s birthday ..."
+              minlength="2"
+              maxlength="200"
+              required
+            />
+          </label> 
+          <label for="studyStart" class="">Год начала обучения
+            <input
+              type="number"
+              id="studyStart" 
+              class="main__add-form__studyStart form__item"
+              name="birthday"
+              placeholder=""
+              minlength="2"
+              maxlength="200"
+              required
+            />
+           </label> 
+          <label for="faculty" class="">Факультет
+            <select data-component="select-faculty" id="faculty" class="form__item select-faculty" name="faculty"></select>
+          </label>
+          <button type="submit" class="btn main__add-form__submit">Add</button>
       </form>
     </section>
   </main>

@@ -14,7 +14,6 @@ class StudenStore {
   }
 
   setStudents(rawData) {
-    // this._students = rawData.map(data => new Student(data));
     this._students = rawData.map(data => ({ ...data }));
   }
 

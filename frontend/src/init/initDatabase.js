@@ -29,11 +29,8 @@ export async function initDB() {
             element.studyStart,
             element.faculty
       );
-      console.log('student ', student);
       return student
     })
-    console.log('freshData ', freshData);
-    console.log('formattedData ', formattedData);
     studentStore.setStudents(formattedData)
   } catch (error) {
     console.error('Error:', error);
