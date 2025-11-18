@@ -17,7 +17,7 @@ export async function fetchDataFromAPI(url) {
             element.FatherName,
             element.LastName,
             element.DateOfBirth,
-            studyYears[Math.floor(Math.random() * studyYears.length)],
+            studyYears[Math.floor(Math.random() * studyYears.length)].label,
             faculties[Math.floor(Math.random() * faculties.length)].label
       );
       return student

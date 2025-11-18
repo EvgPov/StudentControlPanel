@@ -81,19 +81,10 @@
             />
           </label> 
           <label for="studyStart" class="">Год начала обучения
-            <input
-              type="number"
-              id="studyStart" 
-              class="main__add-form__studyStart form__item"
-              name="birthday"
-              placeholder=""
-              minlength="2"
-              maxlength="200"
-              required
-            />
+            <select data-component="select-studyStart" data-style="style" id="studyStart" class="form__item dynamic-select" name="studyStart"></select>
            </label> 
           <label for="faculty" class="">Факультет
-            <select data-component="select-faculty" id="faculty" class="form__item select-faculty" name="faculty"></select>
+            <select data-component="select-faculty" data-style="style" id="faculty" class="form__item dynamic-select" name="faculty"></select>
           </label>
           <button type="submit" class="btn main__add-form__submit">Add</button>
       </form>

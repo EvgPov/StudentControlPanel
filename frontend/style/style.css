@@ -135,6 +135,19 @@ h2 {
   flex-direction: column;
   align-items: flex-start;
 }
+.dynamic-select {
+  color: #6b7280;
+}
+.dynamic-select.filled {
+  color: black;
+}
+.dynamic-select option {
+    color: black;
+}
+.dynamic-select option[value=""] {
+  color: #6b7280;
+}
+
 .btn {
   border: none;
   border-radius: 6px;
