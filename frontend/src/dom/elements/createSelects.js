@@ -10,11 +10,11 @@ export function createSelect(element) {
   const component = element.match(/select-([^"\]]+)/);
  
   if (component[1] === 'faculty')  {
-    placeholder = 'select a faculty';
+    placeholder = 'выберите факультет';
     array = [... faculties];
   } 
   if (component[1] === 'studyStart') {
-    placeholder = 'select the starting year of study';
+    placeholder = 'выберите год начала обучения';
     array = [... studyYears];
   }  
 

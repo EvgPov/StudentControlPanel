@@ -10,19 +10,52 @@
 </head>
 <body class="body">
   <main class="main">
-    <h1 class="main__title">Students Control Panel</h1>
+    <h1 class="main__title">Управление студентами</h1>
     <section class="main__filter"> 
-      <h2 class="main__filter-title">Filters</h2>
+      <h2 class="main__filter-title">Фильтры</h2>
+       <form class="main__filter-form" id="main__filter" name="filter-form" novalidate>
+            <label for="filtername" class="label"><span class="span">ФИО</span>
+              <input
+              type="text"
+              id="filtername"
+              class="main__filter-form__name form__item"
+              name="filtername"
+              pattern="^[a-zA-Zа-яА-ЯЁё\s\-]+$"
+              placeholder="введите ФИО студента для поиска..."
+              title = "Только буквы, пробелы и знак дефиса"
+              minlength="2"
+              maxlength="200"
+              >
+            </label>  
+          <label for="studyStartFilter" class="label"><span class="span">Год начала обучения</span>
+            <select data-component="select-studyStart-filter"
+                    data-style="style"
+                    id="studyStartFilter"
+                    class="form__item dynamic-select"
+                    name="studyStartFilter"
+                    id="studyStartFilter"></select>
+           </label> 
+          <label for="facultyFilter" class="label"><span class="span">Факультет</span>
+            <select data-component="select-faculty-filter"
+                    data-style="style"
+                    id="facultyFilter"
+                    class="form__item dynamic-select" 
+                    name="facultyFilter"
+                    id="facultyFilter"></select>        
+          </label>
+          <button type="submit" class="btn main__filter-form__submit">Найти</button>
+      </form>
+
     </section>
     <section class="main__table">
       <table data-component="students-table" class="main__table-table">
         <thead data-role="table-header">
           <tr>
-            <th data-field="id">№</th>
-            <th data-field="name">ФИО</th>
-            <th data-field="faculty">ФАКУЛЬТЕТ</th>
-            <th data-field="birthday_age">ДАТА РОЖДЕНИЯ (ВОЗРАСТ)</th>
-            <th data-field="studyYears_courseNumber">ГОДЫ ОБУЧЕНИЯ (НОМЕР КУРСА)</th>
+            <th data-field="id" data-sort="id">№</th>
+            <th data-field="name" data-sort="name">ФИО</th>
+            <th data-field="faculty" data-sort="faculty">ФАКУЛЬТЕТ</th>
+            <th data-field="birthday_age" data-sort="birthday_age">ДАТА РОЖДЕНИЯ (ВОЗРАСТ)</th>
+            <th data-field="studyYears_courseNumber" data-sort="studyYears_courseNumber">ГОДЫ ОБУЧЕНИЯ (НОМЕР КУРСА)</th>
             <th data-field="delete"></th>
           </tr>
         </thead>
@@ -30,63 +63,91 @@
       </table>
     </section>
     <section class="main__add">
-      <h2 class="main__add-title">Add a student</h2>
-      <form class="main__add-form" id="add-form" name="form">
-            <label for="studentname" class="label">Имя
+      <h2 class="main__add-title">Добавление студента</h2>
+      <form class="main__add-form" id="add-form" name="form" novalidate>
+            <label for="studentname" class="label"><span class="span">Имя</span>
               <input
               type="text"
               id="studentname"
               class="main__add-form__name form__item"
-              name="studentname"
-              placeholder="input students`s name ..."
+              name="name"
+              pattern="^[a-zA-Zа-яА-ЯЁё\s\-]+$"
+              placeholder="введите имя студента ..."
+              title = "Только буквы, пробелы и знак дефиса"
               minlength="2"
               maxlength="200"
+              data-message-error="Допустимы только буквы, пробелы и знак дефиса, минимум 2 символа"
               required
-              />
+              >
+              <span class = "studentname-error error-message"></span>
             </label>  
-           <label for="surename" class="label">Отчество
+           <label for="surname" class="label"><span class="span">Отчество</span>
               <input
               type="text"
-              name="surename"
+              id="surname"
+              name="surname"
+              pattern="^[a-zA-Zа-яА-ЯЁё\s\-]+$"
               class="main__add-form__surename form__item"
               name="surename"
-              placeholder="input students`s surename ..."
+              placeholder="введите отчество студента ..."
+              title = "Только буквы, пробелы и знак дефиса"
               minlength="2"
               maxlength="200"
+              data-message-error="Допустимы только буквы, пробелы и знак дефиса, минимум 2 символа"
               required
-              />
+              >
+              <span class = "surname-error error-message"></span>
             </label>
-          <label for="lastname" class="label">Фамилия
+          <label for="lastname" class="label"><span class="span">Фамилия</span>
             <input
               type="text"
               id="lastname"
               class="main__add-form__lastname form__item"
+              pattern="^[a-zA-Zа-яА-ЯЁё\s\-]+$"
               name="lastname"
-              placeholder="input students`s lastname ..."
+              placeholder="введите фамилию студента ..."
+              title = "Только буквы, пробелы и знак дефиса"
               minlength="2"
               maxlength="200"
+              data-message-error="Допустимы только буквы, пробелы и знак дефиса, минимум 2 символа"
               required
-            />
+            >
+            <span class = "lastname-error error-message"></span>
           </label>  
-          <label for="birthday" class="">День рождения
+          <label for="birthday" class="label label-birthday"><span class="span span__birthday">День рождения</span>
             <input
               type="date"
               id="birthday"
               class="main__add-form__birthday form__item"
               name="birthday"
-              placeholder="input students`s birthday ..."
+              placeholder="введите день рождения студента ..."
+              title="Дата от 01.01.1900 до сегодняшнего дня, формат дд.мм.гггг"
               minlength="2"
               maxlength="200"
               required
-            />
-          </label> 
-          <label for="studyStart" class="">Год начала обучения
-            <select data-component="select-studyStart" data-style="style" id="studyStart" class="form__item dynamic-select" name="studyStart"></select>
-           </label> 
-          <label for="faculty" class="">Факультет
-            <select data-component="select-faculty" data-style="style" id="faculty" class="form__item dynamic-select" name="faculty"></select>
+            >
+             <span class = "birthday-error error-message"></span>
           </label>
-          <button type="submit" class="btn main__add-form__submit">Add</button>
+          <label for="studyStart" class="label"><span class="span">Год начала обучения</span>
+            <select data-component="select-studyStart"
+                    data-style="style" id="studyStart"
+                    class="form__item dynamic-select"
+                    name="studyStart"
+                    id="studyStart"
+                    required></select>
+                    <span class="studyStart-error error-message">Выберите год начала обучения</span>
+           </label> 
+          <label for="faculty" class="label"><span class="span">Факультет</span>
+            <select data-component="select-faculty"
+                    data-style="style"
+                    id="faculty"
+                    class="form__item dynamic-select" 
+                    name="faculty"
+                    id="faculty"
+                    required></select>
+                    <span class="faculty-error error-message">Выберите факультет</span>
+          </label>
+          <button type="submit" class="btn main__add-form__submit">Добавить</button>
       </form>
     </section>
   </main>

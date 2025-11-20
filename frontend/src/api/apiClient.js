@@ -12,7 +12,7 @@ export default async function apiClient (endpoint, { method = 'GET', body, ... o
       config.body = JSON.stringify(body);
     }
     const response = await fetch(endpoint, config)
-
+     
     let responseBody = response.clone();
 
     if (!response.ok) {

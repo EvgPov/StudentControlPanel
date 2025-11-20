@@ -22,6 +22,7 @@ export async function initDB() {
     // форматируем: { name, fathername, lastname, birthday, faculty }    
     const formattedData = freshData.map(element => {
       const student = new Student (
+            element.id,
             element.name,
             element.surname,
             element.lastname,

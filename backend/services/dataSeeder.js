@@ -1,6 +1,7 @@
 import { Student } from '../models/Student.js'
 import { faculties } from '../models/constants.js';
 import {  studyYears } from '../models/constants.js'
+import { parseBirthday } from '../../frontend/src/utils/parseBirthday.js'
 
 export async function fetchDataFromAPI(url) {
   // получаем данные с API
