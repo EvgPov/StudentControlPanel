@@ -1,4 +1,4 @@
-import { faculties, studyYears } from '../../../../backend/models/constants.js'
+import { faculties, studyYears, endYears } from '../../../../backend/models/constants.js'
 
 export function createSelect(element) {
   let array = [];
@@ -17,7 +17,10 @@ export function createSelect(element) {
     placeholder = 'выберите год начала обучения';
     array = [... studyYears];
   }  
-
+  if (component[1] === 'studyEnd') {
+      placeholder = 'выберите год окончания обучения';
+      array = [... endYears];
+    }  
   select.innerHTML = `<option value="" disabled selected hidden>${placeholder}</option>`;
   // заполняем
   array.forEach(item => {

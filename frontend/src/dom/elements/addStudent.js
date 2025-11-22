@@ -46,12 +46,12 @@ if (!isNameValid(studentData.name)) {
 // проверяем selects
   //studyStart
   if (!studentData.hasOwnProperty('studyStart') || studentData.studyStart === '') {
-    showError(form, 'studyStart', 'Выберите год начала обучения');
+    showError(form, 'studyStart', 'Год начала обучения должен быть установлен');
     hasError = true;
   } else hideError(form, 'studyStart');
   // faculty
   if (!studentData.hasOwnProperty('faculty') || studentData.faculty === '') {
-    showError(form, 'faculty', 'Выберите факультет');
+    showError(form, 'faculty', 'Факультет должен быть установлен');
     hasError = true;
   } else hideError(form, 'faculty');
 
@@ -104,14 +104,11 @@ export async function handleSubmit(event) {
 
       const newStudent = await post(URL_SERVER, studentData);
       alert(`Студент добавлен! ID: ${newStudent.id}`);
-
       form.reset() // очищаем форму
-      // toggleButtonsState(buttonElement, false); // после сброса — разблокирована
       updateSubmitButton(form, buttonElement);
     } catch (error) {
       console.error('Error (add student):', error);
       alert('Ошибка при добавлении студента');
       toggleButtonsState(buttonElement, false); // разблокируем при ошибке
-    }
-  // }  
+    } 
 }

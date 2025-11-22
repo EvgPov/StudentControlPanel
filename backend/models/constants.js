@@ -16,12 +16,12 @@ export const faculties = [
     label: 'Обеспечение информационной безопасности автоматизированных систем'}
 ]
 
-function fillArray() {
+function fillArray(startYear) {
   const array = [];
-  for (let i = 2000; i <= new Date().getFullYear(); i++) {
+  for (let i = startYear; i <= new Date().getFullYear(); i++) {
     array.push({value: String(i), label: String(i)})
   }
   return array;
 }
-export const studyYears = fillArray();
-  
+export const studyYears = fillArray(2000);
+export const endYears = fillArray(2004);

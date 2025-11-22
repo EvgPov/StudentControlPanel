@@ -13,39 +13,47 @@
     <h1 class="main__title">Управление студентами</h1>
     <section class="main__filter"> 
       <h2 class="main__filter-title">Фильтры</h2>
-       <form class="main__filter-form" id="main__filter" name="filter-form" novalidate>
+       <form class="main__filter-form" id="filter-form" name="filter-form">
             <label for="filtername" class="label"><span class="span">ФИО</span>
               <input
               type="text"
               id="filtername"
-              class="main__filter-form__name form__item"
-              name="filtername"
+              class="main__filter-form__name form__item form__item-filter"
+              name="nameFilter"
               pattern="^[a-zA-Zа-яА-ЯЁё\s\-]+$"
               placeholder="введите ФИО студента для поиска..."
               title = "Только буквы, пробелы и знак дефиса"
               minlength="2"
               maxlength="200"
               >
-            </label>  
-          <label for="studyStartFilter" class="label"><span class="span">Год начала обучения</span>
-            <select data-component="select-studyStart-filter"
-                    data-style="style"
-                    id="studyStartFilter"
-                    class="form__item dynamic-select"
-                    name="studyStartFilter"
-                    id="studyStartFilter"></select>
-           </label> 
-          <label for="facultyFilter" class="label"><span class="span">Факультет</span>
-            <select data-component="select-faculty-filter"
+            </label>
+             <label for="facultyFilter" class="label"><span class="span">Факультет</span>
+            <select data-component="filterselect-faculty"
                     data-style="style"
                     id="facultyFilter"
-                    class="form__item dynamic-select" 
+                    class="form__item dynamic-select form__item-filter" 
                     name="facultyFilter"
                     id="facultyFilter"></select>        
           </label>
-          <button type="submit" class="btn main__filter-form__submit">Найти</button>
+          <label for="studyStartFilter" class="label"><span class="span">Год начала обучения</span>
+            <select data-component="filterselect-studyStart"
+                    data-style="style"
+                    id="studyStartFilter"
+                    class="form__item dynamic-select form__item-filter"
+                    name="studyStartFilter"
+                    id="studyStartFilter"></select>
+           </label> 
+          <label for="studyEndFilter" class="label"><span class="span">Год окончания обучения</span>
+            <select data-component="filterselect-studyEnd"
+                    data-style="style"
+                    id="studyEndFilter"
+                    class="form__item dynamic-select form__item-filter"
+                    name="studyEndFilter"
+                    id="studyEndFilter"></select>
+           </label>         
+          <button type="submit" class="btn main__filter-form__submit">Применить</button>
+          <button type="button" class="btn reset-filters-btn">Сбросить фильтры</button>
       </form>
-
     </section>
     <section class="main__table">
       <table data-component="students-table" class="main__table-table">
@@ -130,7 +138,8 @@
           </label>
           <label for="studyStart" class="label"><span class="span">Год начала обучения</span>
             <select data-component="select-studyStart"
-                    data-style="style" id="studyStart"
+                    data-style="style"
+                    id="studyStart"
                     class="form__item dynamic-select"
                     name="studyStart"
                     id="studyStart"

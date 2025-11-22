@@ -8,14 +8,4 @@ export class Student {
     this.studyStart = studyStart.toString();
     this.faculty = faculty.toString();
   }
-  // toJSON() {
-  //   return {
-  //     name: this.name,
-  //     surname: this.surname,
-  //     lastname: this.lastname,
-  //     birthday: this.birthday,
-  //     studyStart: this.studyStart,
-  //     faculty: this.faculty
-  //   }
-  // }
 }
