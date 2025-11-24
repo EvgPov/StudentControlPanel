@@ -1,7 +1,7 @@
 import { parseBirthday } from '../utils/parseBirthday.js'
 
 export function isNameValid(name) { 
-  return name && name.trim().length > 2 &&  /^[a-zA-Zа-яА-ЯЁё\s-]+$/.test(name)
+  return name && name.trim().length >= 2 &&  /^[a-zA-Zа-яА-ЯЁё\s-]+$/.test(name)
 };
 export function isDateValid(date) {
   const parseDate = parseBirthday(date);

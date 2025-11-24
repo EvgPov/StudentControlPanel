@@ -80,8 +80,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   tableBody.addEventListener('click', async(event) => {
     // проверяем кликнули ли по иконке удаления
     const deleteIcon = event.target.closest(".delete-icon");
-    // const row = event.target.closest('tr'); // ищем строку на которой произошел клик
-    // if(!row.dataset.id) return;
     if (!deleteIcon) return;
   // находим строку
     const row = deleteIcon.closest('tr');
@@ -90,13 +88,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     const studentId = row.dataset.id; // получаем id студента
     const studentName = row.querySelector('[data-field="name"]');
     
-    deleteSudent(studentId, studentName.textContent)
-      .then (data => {
-        initDB() // получаем данные из базы данных
-        .then(data => {
-          refresh(studentStore.students); // перерисовываем таблицу
-        })
-      })
+    let result = confirm(`Вы уверены, что хотите удалить студента: \n\n${studentName.textContent}\nID: ${studentId}?`);
+    if (result) {
+        deleteSudent(studentId, studentName.textContent)
+        .then (data => {
+          initDB() // получаем данные из базы данных
+          .then(data => {
+            refresh(studentStore.students); // перерисовываем таблицу
+          })
+        })  
+    } else {
+      alert(`Отмена удаления студента: \n\n${studentName.textContent}\nID: ${studentId}`);
+    }
   })
   // фильтрация данных
   // при отправке формы добавления стуента
@@ -109,10 +112,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         refresh(data);
       })
     })    
-  resetBtn.addEventListener('click', () => {
-    initDB() // получаем данные из базы данных
-      .then(data => {
-        refresh(studentStore.students); // перерисовываем таблицу
-      })
-  })
+  resetBtn.addEventListener('click', () => 
+    {
+      initDB() // получаем данные из базы данных
+        .then(data => {
+          refresh(studentStore.students); // перерисовываем таблицу
+        })
+        formFilter.reset();
+    })
 })

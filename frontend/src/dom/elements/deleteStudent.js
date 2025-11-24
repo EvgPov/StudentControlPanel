@@ -3,8 +3,8 @@ import { del } from '../../api/script.js'
 
 export async function deleteSudent(id, name) {
   try {
-    const response = await del(`${URL_SERVER}/${id}`);
-    alert(`Студент "${name}" удален!\nID: ${id}`);
+    await del(`${URL_SERVER}/${id}`);
+    alert(`Студент удален! \n\n${name}\nID: ${id}`);
   } catch (error) {
     console.error('Error (delete student):', error);
   }

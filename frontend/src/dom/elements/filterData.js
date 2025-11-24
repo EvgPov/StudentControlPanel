@@ -23,7 +23,7 @@ export async function filterData(event) {
           : searchString = `${cleanDataForFilter[key]}`;
 
       const response = await get(`${URL_SERVER}/?search=${searchString}`);
-      form.reset() // очищаем форму
+      // form.reset() // очищаем форму
       return response;
       } else { // если выбраны два и более поля для фильтрации, то фильтруем внутренний масив
         const name = cleanDataForFilter.nameFilter;
@@ -50,7 +50,7 @@ export async function filterData(event) {
                 : studyYears.some(y => y.label === String(parseInt(student.studyStart) + 4));
           return nameMatch && facultyMatch && studyStartyMatch && studyEndMatch;    
         })
-        form.reset() // очищаем форму
+        // form.reset() // очищаем форму
         return filterStudents;
       }
   } catch(error){
